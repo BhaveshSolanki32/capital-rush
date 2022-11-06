@@ -4174,7 +4174,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 20
+  m_ScrollSensitivity: 10
   m_Viewport: {fileID: 1143727885}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 0}
@@ -4661,6 +4661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _current_stock: {fileID: 801137458}
+  _sort_stocks: {fileID: 641012336}
 --- !u!222 &1206374706
 CanvasRenderer:
   m_ObjectHideFlags: 0
