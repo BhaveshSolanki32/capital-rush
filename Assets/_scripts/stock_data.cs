@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class stock_data : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class stock_data : MonoBehaviour
     public int _holdings;
     [SerializeField] string _details;
     Text[] _child_text;
-    [SerializeField] Text _details_text; //holds object text for details tab
+    [SerializeField] GameObject _details_text; //holds object text for details tab
 
     [SerializeField] AddRemove_stocks _addremove_stocks;
 
@@ -23,7 +24,8 @@ public class stock_data : MonoBehaviour
 
     public void on_stock_select()
     {
-        _details_text.text = _details;
+        _details_text.transform.GetChild(0).GetComponent<Text>().text = _details;
+        _details_text.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _name;
         _addremove_stocks._current_stock = this;
     }
 
@@ -33,6 +35,7 @@ public class stock_data : MonoBehaviour
         _child_text[1].text = _price;
         _child_text[2].text = _multiplier;
         _child_text[3].text = _holdings.ToString();
-        _details_text.text = _details;
+        _details_text.transform.GetChild(0).GetComponent<Text>().text = _details;
+        _details_text.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _name;
     }
 }

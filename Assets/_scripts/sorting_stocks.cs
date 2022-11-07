@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class sorting_stocks : MonoBehaviour
 {
-
+    //handles sorting of element according to their holdings
     private void Start()
     {
         sort_stocks_all();
