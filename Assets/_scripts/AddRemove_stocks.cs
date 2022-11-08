@@ -11,13 +11,13 @@ public class AddRemove_stocks : MonoBehaviour
     {
         _current_stock._holdings += 1;
         _current_stock.gameObject.GetComponentsInChildren<Text>()[3].text = _current_stock._holdings.ToString();
-        _sort_stocks.OnAdd_holdings(_current_stock.gameObject);
+        _sort_stocks.onAddRemove_holdings(_current_stock.gameObject,1);
     }
 
     public void remove_stock()
     {
         if(_current_stock._holdings>0)  _current_stock._holdings -= 1;
         _current_stock.gameObject.GetComponentsInChildren<Text>()[3].text = _current_stock._holdings.ToString();
-        _sort_stocks.OnRemove_holdings(_current_stock.gameObject);
+        _sort_stocks.onAddRemove_holdings(_current_stock.gameObject,-1);
     }
 }
