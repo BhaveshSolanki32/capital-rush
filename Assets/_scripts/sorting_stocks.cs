@@ -120,35 +120,21 @@ public class sorting_stocks : MonoBehaviour
             target.transform.position = Vector3.Lerp(target.transform.position, _place_holder.transform.position, 0.1f) + new_scroll_post - old_scroll_post;
             old_scroll_post = transform.position;
 
-            int upordown; //check if the is above below the mask
-            if (395 > _place_holder.transform.position.y) upordown = 1;
-            else upordown = -1;
-
-            if (!RectTransformUtility.RectangleContainsScreenPoint(transform.parent.GetComponent<RectTransform>(), _place_holder.transform.position))
-            {
-                transform.parent.GetComponent<ScrollRect>().verticalNormalizedPosition -= 0.1f * upordown;
-            }
-
             yield return new WaitForSeconds(0.02f);
-
-
         }
         _place_holder.SetActive(false);
         target.transform.SetParent(transform);
         target.transform.SetSiblingIndex(_place_holder.transform.GetSiblingIndex());
         _place_holder.transform.SetParent(this.transform.parent.parent);
 
-        
+        int upordown; //check if the is above below the mask
+        if (395 > target.transform.position.y) upordown = 1;
+        else upordown = -1;
 
-        //while (!RectTransformUtility.RectangleContainsScreenPoint(transform.parent.GetComponent<RectTransform>(), target.transform.position))
-        //{
-        //    print("down");
-        //    transform.parent.GetComponent<ScrollRect>().verticalNormalizedPosition -= 0.1f * upordown;
-        //    yield return new WaitForSeconds(0.1f);
-        //}
-
-
-
+        while (!RectTransformUtility.RectangleContainsScreenPoint(transform.parent.GetComponent<RectTransform>(), target.transform.position))
+        {
+            transform.parent.GetComponent<ScrollRect>().verticalNormalizedPosition -= 0.1f * upordown;
+        }
 
         StopCoroutine("moveTowards");
         yield return null;
