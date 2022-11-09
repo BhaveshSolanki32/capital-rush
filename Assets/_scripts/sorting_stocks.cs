@@ -35,7 +35,7 @@ public class sorting_stocks : MonoBehaviour
     public void onAddRemove_holdings(GameObject _target, int _AddOrRemove)//_target holds the current selected stock,, _AddOrRemove can only be 1 or -1 tells if stock has been added or removed
     {
         target = _target;
-        
+
 
         _current_index = _target.transform.GetSiblingIndex();
         _index_to_check = _current_index - _AddOrRemove;
@@ -119,29 +119,36 @@ public class sorting_stocks : MonoBehaviour
             new_scroll_post = transform.position;
             target.transform.position = Vector3.Lerp(target.transform.position, _place_holder.transform.position, 0.1f) + new_scroll_post - old_scroll_post;
             old_scroll_post = transform.position;
+
+            int upordown; //check if the is above below the mask
+            if (395 > _place_holder.transform.position.y) upordown = 1;
+            else upordown = -1;
+
+            if (!RectTransformUtility.RectangleContainsScreenPoint(transform.parent.GetComponent<RectTransform>(), _place_holder.transform.position))
+            {
+                transform.parent.GetComponent<ScrollRect>().verticalNormalizedPosition -= 0.1f * upordown;
+            }
+
             yield return new WaitForSeconds(0.02f);
 
-        }
 
-        while(!RectTransformUtility.RectangleContainsScreenPoint(transform.parent.GetComponent<RectTransform>(), target.transform.position))
-        {
-            if (transform.parent.position.y > target.transform.position.y)
-            {
-                transform.parent.GetComponent<ScrollRect>().verticalNormalizedPosition += 0.1f;
-            }
-            else
-            {
-                transform.parent.GetComponent<ScrollRect>().verticalNormalizedPosition -= 0.1f;
-            }
-            yield return new WaitForSeconds(0.1f);
         }
-      
         _place_holder.SetActive(false);
         target.transform.SetParent(transform);
         target.transform.SetSiblingIndex(_place_holder.transform.GetSiblingIndex());
         _place_holder.transform.SetParent(this.transform.parent.parent);
 
         
+
+        //while (!RectTransformUtility.RectangleContainsScreenPoint(transform.parent.GetComponent<RectTransform>(), target.transform.position))
+        //{
+        //    print("down");
+        //    transform.parent.GetComponent<ScrollRect>().verticalNormalizedPosition -= 0.1f * upordown;
+        //    yield return new WaitForSeconds(0.1f);
+        //}
+
+
+
 
         StopCoroutine("moveTowards");
         yield return null;
